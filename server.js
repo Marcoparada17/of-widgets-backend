@@ -1,8 +1,7 @@
-import express from "express";
-import cors from "cors";
-import { WebSocketServer } from "ws";
-
-const PORT = process.env.PORT || 8080;
+const express = require("express");
+const cors = require("cors");
+const http = require("http");
+const { WebSocketServer } = require("ws");
 
 const app = express();
 app.use(cors());
@@ -10,42 +9,50 @@ app.use(express.json());
 
 const connections = new Map();
 
-const wss = new WebSocketServer({ noServer: true });
-
-wss.on("connection", (ws, request) => {
-  const url = new URL(request.url, `http://${request.headers.host}`);
-  const modelId = url.searchParams.get("modelId");
-
-  if (!modelId) {
-    ws.close();
-    return;
-  }
-
-  connections.set(modelId, ws);
-
-  ws.on("close", () => {
-    connections.delete(modelId);
-  });
+app.get("/", (req, res) => {
+  res.send("WebSocket backend running");
 });
 
 app.post("/api/send", (req, res) => {
   const { modelId, type, payload } = req.body;
-  const client = connections.get(modelId);
 
-  if (!client) {
+  const ws = connections.get(modelId);
+  if (!ws || ws.readyState !== 1) {
     return res.json({ ok: false, error: "Modelo no conectado" });
   }
 
-  client.send(JSON.stringify({ type, payload }));
+  ws.send(JSON.stringify({ type, payload }));
   res.json({ ok: true });
 });
 
-const server = app.listen(PORT, () =>
-  console.log("Backend corriendo en", PORT)
-);
+const server = http.createServer(app);
+
+// WebSocket server ON THE SAME HTTP SERVER
+const wss = new WebSocketServer({ noServer: true });
 
 server.on("upgrade", (req, socket, head) => {
-  wss.handleUpgrade(req, socket, head, (ws) => {
-    wss.emit("connection", ws, req);
+  const url = new URL(req.url, "http://localhost");
+
+  const modelId = url.searchParams.get("modelId");
+  if (!modelId) {
+    socket.destroy();
+    return;
+  }
+
+  wss.handleUpgrade(req, socket, head, (wsocket) => {
+    wss.emit("connection", wsocket, modelId);
   });
 });
+
+wss.on("connection", (ws, modelId) => {
+  console.log("Widget conectado:", modelId);
+  connections.set(modelId, ws);
+
+  ws.on("close", () => {
+    console.log("Widget desconectado:", modelId);
+    connections.delete(modelId);
+  });
+});
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => console.log("Backend corriendo en", PORT));
