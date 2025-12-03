@@ -7,12 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Conexiones por modeloId
 const connections = new Map();
 
 app.get("/", (req, res) => {
   res.send("WebSocket backend running");
 });
 
+// Endpoint para enviar mensajes
 app.post("/api/send", (req, res) => {
   const { modelId, type, payload } = req.body;
 
@@ -25,25 +27,32 @@ app.post("/api/send", (req, res) => {
   res.json({ ok: true });
 });
 
+// Servidor HTTP base (Express + WebSocket)
 const server = http.createServer(app);
 
-// WebSocket server ON THE SAME HTTP SERVER
+// WebSocket server compartiendo el mismo server
 const wss = new WebSocketServer({ noServer: true });
 
+// Recibir upgrade desde Railway
 server.on("upgrade", (req, socket, head) => {
-  const url = new URL(req.url, "http://localhost");
+  try {
+    const url = new URL(req.url, "http://localhost");
+    const modelId = url.searchParams.get("modelId");
 
-  const modelId = url.searchParams.get("modelId");
-  if (!modelId) {
+    if (!modelId) {
+      socket.destroy();
+      return;
+    }
+
+    wss.handleUpgrade(req, socket, head, (wsocket) => {
+      wss.emit("connection", wsocket, modelId);
+    });
+  } catch (err) {
     socket.destroy();
-    return;
   }
-
-  wss.handleUpgrade(req, socket, head, (wsocket) => {
-    wss.emit("connection", wsocket, modelId);
-  });
 });
 
+// Conexión WebSocket
 wss.on("connection", (ws, modelId) => {
   console.log("Widget conectado:", modelId);
   connections.set(modelId, ws);
