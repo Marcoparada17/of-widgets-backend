@@ -11,12 +11,10 @@
       background: #111;
       color: #fff;
     }
-
     h2 {
       color: #00f7ff;
       text-shadow: 0 0 10px #00eaff;
     }
-
     input {
       width: 250px;
       padding: 10px;
@@ -25,7 +23,6 @@
       border-radius: 6px;
       font-size: 16px;
     }
-
     button {
       margin-top: 10px;
       padding: 12px 20px;
@@ -38,17 +35,11 @@
       background: #00f7ff;
       box-shadow: 0 0 10px #00dfff;
     }
-
-    button:hover {
-      filter: brightness(1.2);
-    }
-
     .danger {
       background: red;
       color: white !important;
       box-shadow: 0 0 10px red;
     }
-
     hr {
       margin: 30px 0;
       border: 1px solid #444;
@@ -60,10 +51,16 @@
 <h2>Enviar Tip</h2>
 
 <label>Nombre</label>
+<br>
 <input id="name" placeholder="Nombre del usuario">
 
+<br><br>
+
 <label>Monto</label>
+<br>
 <input id="amount" type="number" placeholder="Ej: 20">
+
+<br>
 
 <button onclick="sendTip()">Enviar Tip</button>
 
@@ -77,25 +74,19 @@
 <h2>Goal Bar</h2>
 
 <label>Nueva Goal ($)</label>
+<br>
 <input id="goal" type="number" placeholder="Ej: 200">
 
+<br>
 <button onclick="setGoal()">Establecer Goal</button>
-
 <button class="danger" onclick="clearGoal()">Limpiar Goal</button>
 
 <hr>
 
-<h2>Estado Actual</h2>
-<div id="debug"></div>
-
 <script>
 const MODEL_ID = "roman001";
-const API_URL = "/api/send"; // 🔥 relativo al mismo dominio
+const API_URL = "/api/send";   // 🔥🔥🔥 RUTA RELATIVA — FUNCIONA LOCAL Y PRODUCCIÓN
 
-
-// =========================
-// ENVIAR TIP
-// =========================
 function sendTip() {
   const name = document.getElementById("name").value.trim();
   const amount = Number(document.getElementById("amount").value);
@@ -108,54 +99,36 @@ function sendTip() {
   sendToServer("tip", { name, amount });
 }
 
-// =========================
-// LIMPIAR TOP 3
-// =========================
 function clearAll() {
   sendToServer("clear");
 }
 
-// =========================
-// CONFIGURAR GOAL
-// =========================
 function setGoal() {
   const goal = Number(document.getElementById("goal").value);
-
   if (!goal || goal <= 0) {
     alert("La goal debe ser mayor a 0.");
     return;
   }
-
   sendToServer("setGoal", { goal });
-  updateDebug(`Goal establecida: $${goal}`);
 }
 
-// =========================
-// LIMPIAR GOAL
-// =========================
 function clearGoal() {
   sendToServer("clearGoal");
-  updateDebug("Goal limpiada.");
 }
 
-// =========================
-// FUNCIONES UTILITARIAS
-// =========================
 function sendToServer(type, payload = {}) {
   fetch(API_URL, {
     method: "POST",
-    headers: {"Content-Type":"application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       modelId: MODEL_ID,
       type,
       payload
     })
-  }).then(res => res.json())
-    .then(data => console.log("Respuesta:", data));
-}
-
-function updateDebug(text) {
-  document.getElementById("debug").textContent = text;
+  })
+    .then(res => res.json())
+    .then(data => console.log("Respuesta backend:", data))
+    .catch(err => console.error("❌ Error en fetch:", err));
 }
 </script>
 
