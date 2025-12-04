@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Panel OF</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #111;
+      color: #fff;
+    }
+
+    h2 {
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    input {
+      width: 250px;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      background: #00f7ff;
+      box-shadow: 0 0 10px #00dfff;
+    }
+
+    button:hover {
+      filter: brightness(1.2);
+    }
+
+    .danger {
+      background: red;
+      color: white !important;
+      box-shadow: 0 0 10px red;
+    }
+
+    hr {
+      margin: 30px 0;
+      border: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Enviar Tip</h2>
+
+<label>Nombre</label>
+<input id="name" placeholder="Nombre del usuario">
+
+<label>Monto</label>
+<input id="amount" type="number" placeholder="Ej: 20">
+
+<button onclick="sendTip()">Enviar Tip</button>
+
+<hr>
+
+<h2>Top 3</h2>
+<button class="danger" onclick="clearAll()">Limpiar Top 3</button>
+
+<hr>
+
+<h2>Goal Bar</h2>
+
+<label>Nueva Goal ($)</label>
+<input id="goal" type="number" placeholder="Ej: 200">
+
+<button onclick="setGoal()">Establecer Goal</button>
+
+<button class="danger" onclick="clearGoal()">Limpiar Goal</button>
+
+<hr>
+
+<h2>Estado Actual</h2>
+<div id="debug"></div>
+
+<script>
+const MODEL_ID = "roman001";
+const API_URL = "http://localhost:8080/api/send";
+
+// =========================
+// ENVIAR TIP
+// =========================
+function sendTip() {
+  const name = document.getElementById("name").value.trim();
+  const amount = Number(document.getElementById("amount").value);
+
+  if (!name || !amount) {
+    alert("Debes escribir un nombre y un monto válido.");
+    return;
+  }
+
+  sendToServer("tip", { name, amount });
+}
+
+// =========================
+// LIMPIAR TOP 3
+// =========================
+function clearAll() {
+  sendToServer("clear");
+}
+
+// =========================
+// CONFIGURAR GOAL
+// =========================
+function setGoal() {
+  const goal = Number(document.getElementById("goal").value);
+
+  if (!goal || goal <= 0) {
+    alert("La goal debe ser mayor a 0.");
+    return;
+  }
+
+  sendToServer("setGoal", { goal });
+  updateDebug(`Goal establecida: $${goal}`);
+}
+
+// =========================
+// LIMPIAR GOAL
+// =========================
+function clearGoal() {
+  sendToServer("clearGoal");
+  updateDebug("Goal limpiada.");
+}
+
+// =========================
+// FUNCIONES UTILITARIAS
+// =========================
+function sendToServer(type, payload = {}) {
+  fetch(API_URL, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      modelId: MODEL_ID,
+      type,
+      payload
+    })
+  }).then(res => res.json())
+    .then(data => console.log("Respuesta:", data));
+}
+
+function updateDebug(text) {
+  document.getElementById("debug").textContent = text;
+}
+</script>
+
+</body>
+</html>

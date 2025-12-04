@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  background: transparent;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+#goal-container {
+  padding: 20px;
+}
+
+#goal-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 12px #00f7ff;
+}
+
+#bar-bg {
+  width: 80%;
+  height: 35px;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 3px solid #00f7ff;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+#bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f7ff, #00c8ff);
+  box-shadow: 0 0 20px #00eaff;
+  transition: width .4s ease-out;
+}
