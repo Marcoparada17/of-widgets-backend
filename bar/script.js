@@ -1,5 +1,6 @@
 const MODEL_ID = "roman001";
-const ws = new WebSocket(`ws://localhost:8080/?modelId=${MODEL_ID}`);
+ws = new WebSocket(`wss://of-widgets-backend-production.up.railway.app/?modelId=${MODEL_ID}`);
+
 
 let goal = 0;
 let current = 0;

@@ -8,7 +8,8 @@ let lastLeader = null;
 function connectWS() {
   console.log("🔌 Conectando WebSocket...");
 
-  ws = new WebSocket(`ws://127.0.0.1:8080/?modelId=${MODEL_ID}`);
+  ws = new WebSocket(`wss://of-widgets-backend-production.up.railway.app/?modelId=${MODEL_ID}`);
+
 
   ws.onopen = () => {
     console.log("🟢 WS conectado (Widget)");
