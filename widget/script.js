@@ -10,7 +10,6 @@ function connectWS() {
 
   ws = new WebSocket(`wss://of-widgets-backend-production.up.railway.app/?modelId=${MODEL_ID}`);
 
-
   ws.onopen = () => {
     console.log("🟢 WS conectado (Widget)");
     if (reconnectTimer) clearTimeout(reconnectTimer);
@@ -66,15 +65,21 @@ function updateUI() {
     div.className = "tip-item";
     div.setAttribute("data-name", name);
 
-    const crown = index === 0 ? "👑" : "";
+    // 🖤 BDSM Name Style 
+    const bdsmName = `${name} 🖤⛓️`;
+
+    // 🥇 BDSM Crown (solo para #1)
+    const bdsmCrown = index === 0 ? "🔒🔗" : ""; // cadena en vez de corona
+
     div.innerHTML = `
-      <span>${name} ${crown ? `<span class="crown">${crown}</span>` : ""}</span>
+      <span>${bdsmName} ${bdsmCrown ? `<span class="crown">${bdsmCrown}</span>` : ""}</span>
       <span>$${total}</span>
     `;
 
     list.appendChild(div);
   });
 
+  // 💥 Efecto boom cuando cambia el líder
   if (leader && leader !== lastLeader) {
     const leaderEl = document.querySelector(`.tip-item[data-name="${leader}"]`);
     if (leaderEl) boomEffect(leaderEl);

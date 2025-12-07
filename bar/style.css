@@ -1,35 +1,96 @@
+/* ================================
+   🔥 BDSM GOAL BAR — FULL STYLE
+   ================================ */
+
 body {
   margin: 0;
+  padding: 20px;
   background: transparent;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
+  font-family: "Arial Black", sans-serif;
+  color: #fff;
   text-align: center;
 }
 
-#goal-container {
-  padding: 20px;
-}
-
+/* 🔥 Título de la Goal */
 #goal-title {
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-shadow: 0 0 12px #00f7ff;
+  font-size: 24px;
+  font-weight: 900;
+  color: #ff5050;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px #b30000;
+  margin-bottom: 12px;
 }
 
-#bar-bg {
-  width: 80%;
-  height: 35px;
+/* 🔗 Contenedor BDSM */
+#goal-wrapper {  
+  width: 100%;
+  max-width: 600px;
+  height: 32px;
   margin: 0 auto;
-  border-radius: 20px;
-  border: 3px solid #00f7ff;
-  background: rgba(0, 0, 0, 0.3);
+
+  background: #1a0000;
+  border: 3px solid #b30000;
+  border-radius: 12px;
   overflow: hidden;
+
+  box-shadow: 0 0 20px rgba(179, 0, 0, 0.5), 
+              inset 0 0 12px rgba(255, 0, 0, 0.3);
 }
 
+/* 🩸 Barra principal */
 #bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #00f7ff, #00c8ff);
-  box-shadow: 0 0 20px #00eaff;
-  transition: width .4s ease-out;
+  background: linear-gradient(
+    to right,
+    #4d0000,
+    #cc0000,
+    #ff0000
+  );
+  transform-origin: left;
+}
+
+/* ⚡ LATIGAZO ANIMATION */
+@keyframes whip {
+  0% {
+    width: 0%;
+    transform: skewX(-35deg);
+  }
+  50% {
+    transform: skewX(15deg);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
+}
+
+/* 💥 Glow cuando llega al 100% */
+@keyframes pulseGlow {
+  0% {
+    filter: brightness(1);
+    box-shadow: 0 0 10px #b30000;
+  }
+  100% {
+    filter: brightness(1.6);
+    box-shadow: 0 0 18px #ff1a1a;
+  }
+}
+
+/* Extra vibe BDSM */
+#goal-wrapper::before,
+#goal-wrapper::after {
+  content: "⛓️";
+  position: absolute;
+  font-size: 26px;
+  top: -40px;
+  color: #b30000;
+  opacity: 0.6;
+}
+
+#goal-wrapper::before {
+  left: -35px;
+}
+
+#goal-wrapper::after {
+  right: -35px;
 }

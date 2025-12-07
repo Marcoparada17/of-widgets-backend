@@ -15,11 +15,14 @@ console.log("Archivos en backend:", fs.readdirSync(__dirname));
 app.use("/widget", express.static(path.join(__dirname, "widget")));
 app.use("/panel", express.static(path.join(__dirname, "panel")));
 app.use("/bar", express.static(path.join(__dirname, "bar")));
+app.use("/overlay", express.static(path.join(__dirname, "overlay")));
+
 
 console.log("Rutas estáticas:");
 console.log(" -> /widget  =>", path.join(__dirname, "widget"));
 console.log(" -> /panel   =>", path.join(__dirname, "panel"));
 console.log(" -> /bar     =>", path.join(__dirname, "bar"));
+console.log(" -> /overlay     =>", path.join(__dirname, "overlay"));
 
 // MULTICONEXIONES POR modelId
 const connections = new Map();
