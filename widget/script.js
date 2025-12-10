@@ -75,7 +75,7 @@ function updateUI() {
     let badge = "";
     if (index === 0) {
       badge = ` <span class="crown">👑</span>
-                <span class="snowman-mvp">⛄⛓️</span>`;
+                <span class="snowman-mvp">⛄</span>`;
     }
 
     div.innerHTML = `
