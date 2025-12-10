@@ -1,64 +1,46 @@
 body {
-  margin: 0;
-  padding: 20px;
   background: transparent;
+  margin: 0;
+  padding: 0;
+  color: white;
   text-align: center;
-  font-family: Arial Black, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-#goal-title {
-  font-size: 24px;
-  font-weight: 900;
-  color: #ff5050;
-  text-shadow: 0 0 12px #b30000;
-  margin-bottom: 15px;
+.goal-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-shadow: 0px 0px 8px red;
 }
 
 #goal-wrapper {
-  width: 100%;
-  max-width: 600px;
-  height: 32px;
-  margin: 0 auto;
-
-  background: #1a0000;
-  border: 3px solid #b30000;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(179,0,0,0.6), inset 0 0 10px rgba(255,0,0,0.3);
-
   position: relative;
+  width: 90%;
+  height: 40px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid #ffdddd;
+  background: rgba(255, 255, 255, 0.2);
 }
-
-/* ❄ CHAIN EFFECT */
-#goal-wrapper::before,
-#goal-wrapper::after {
-  content: "⛓️";
-  position: absolute;
-  top: -35px;
-  font-size: 26px;
-  color: #b30000;
-  opacity: 0.7;
-}
-
-#goal-wrapper::before { left: -25px; }
-#goal-wrapper::after { right: -25px; }
 
 #bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(to right, #4d0000, #cc0000, #ff0000);
-  transform-origin: left;
+  background: linear-gradient(90deg, #ff0000, #ff8800, #ffee00);
+  transition: width 0.4s ease;
 }
 
-/* LATIGO */
-@keyframes whip {
-  0%   { width: 0%; transform: skewX(-35deg); }
-  60%  { transform: skewX(15deg); }
-  100% { transform: skewX(0deg); }
+#whip {
+  position: absolute;
+  right: -80px;
+  top: -15px;
+  width: 80px;
+  animation: whipMove 1.5s infinite ease-in-out;
 }
 
-/* Glow cuando llega al 100% */
-@keyframes pulseGlow {
-  0%   { filter: brightness(1); }
-  100% { filter: brightness(1.6); }
+@keyframes whipMove {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(0deg); }
 }

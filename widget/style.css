@@ -1,52 +1,61 @@
 body {
   background: transparent;
-  font-family: "Arial Black", sans-serif;
-  color: #fff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 #container {
+  width: 350px;
   padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  color: white;
   text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-h2 {
-  color: #b30000;
-  text-shadow: 0 0 15px #600000;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
+.title {
+  font-size: 26px;
+  color: #ffeecc;
+  text-shadow: 0 0 10px #ff0000;
 }
 
 .tip-item {
+  font-size: 20px;
+  padding: 8px;
+  margin: 6px 0;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 12px 18px;
-  margin-bottom: 10px;
-
-  background: linear-gradient(to right, #1a0000, #330000);
-  border-left: 5px solid #b30000;
-  border-radius: 6px;
-
-  font-size: 20px;
-  font-weight: bold;
-
-  box-shadow: 0 0 10px rgba(179, 0, 0, 0.6);
-  letter-spacing: 1px;
+  border-left: 4px solid #ff4d4d;
 }
 
 .crown {
   font-size: 24px;
-  margin-left: 8px;
-  color: #b30000;
-  text-shadow: 0 0 10px #ff0000;
+  margin-left: 5px;
 }
 
-/* BDSM BOOM EFFECT */
-@keyframes boom {
-  0%   { transform: scale(1);   filter: brightness(1); }
-  30%  { transform: scale(1.30); filter: brightness(2); }
-  100% { transform: scale(1);   filter: brightness(1); }
+.ball {
+  font-size: 22px;
+}
+
+.snowman-mvp {
+  font-size: 28px;
+  margin-left: 8px;
+}
+
+.boom {
+  animation: boomAnim .4s ease-out;
+}
+
+@keyframes boomAnim {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25); }
+  100% { transform: scale(1); }
 }
