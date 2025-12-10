@@ -28,23 +28,48 @@ body {
 }
 
 /* ❄️ Nieve cayendo */
+/* ❄️ Nieve full CSS */
 .snow-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   pointer-events: none;
-  background-image: url("https://imgur.com/gallery/beneath-glow-of-streetlights-bright-love-blooms-winter-night-amidst-city-s-snowy-embrace-two-hearts-find-solace-each-other-s-grace-K0bjRd9#wkMgVOr");
-  background-size: 200px;
-  animation: snowFall 8s linear infinite;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.snow-layer::before,
+.snow-layer::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  animation: snowfall 12s linear infinite;
+  opacity: 0.8;
+}
+
+/* Copos grandes */
+.snow-layer::before {
+  background-image: radial-gradient(white 2px, transparent 3px);
+  animation-duration: 14s;
+  filter: blur(1px);
+}
+
+/* Copos pequeños */
+.snow-layer::after {
+  background-image: radial-gradient(white 1px, transparent 3px);
+  animation-duration: 9s;
   opacity: 0.6;
 }
 
-@keyframes snowFall {
-  0% { background-position: 0px 0px; }
-  100% { background-position: 0px 500px; }
+/* Animación */
+@keyframes snowfall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(50%); }
 }
+
 
 /* ✨ Estrellas */
 .stars {
