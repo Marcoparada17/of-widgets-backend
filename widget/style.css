@@ -8,9 +8,10 @@ body {
   width: 340px;
   padding: 15px;
   border-radius: 15px;
-  background: rgba(255,255,255,0.15);
+  background: transparent;
   backdrop-filter: blur(6px);
   color: white;
+  font-style: bold;
   text-align: center;
   border: 2px solid rgba(255,255,255,0.25);
 }
@@ -19,7 +20,7 @@ body {
   margin: 8px 0;
   padding: 8px;
   border-radius: 10px;
-  background: transparent;
+  background: tra;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
