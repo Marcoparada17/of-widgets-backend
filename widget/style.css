@@ -19,14 +19,14 @@ body {
   margin: 8px 0;
   padding: 8px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.2);
+  background: transparent;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
 }
 
 .mvp {
-  background: linear-gradient(90deg, #ff0000, #ffd700);
+  background: linear-gradient(90deg, #ff0000, #05831a);
   box-shadow: 0 0 15px gold;
   animation: pop 0.4s ease;
 }
