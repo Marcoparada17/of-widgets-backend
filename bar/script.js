@@ -8,6 +8,7 @@ let current = 0;
 
 const bell = document.getElementById("bellSound");
 const particlesLayer = document.querySelector(".particles");
+const insideText = document.querySelector(".goal-inside-text");
 
 ws.onmessage = (msg) => {
   const data = JSON.parse(msg.data);
@@ -15,6 +16,7 @@ ws.onmessage = (msg) => {
   if (data.type === "setGoal") {
     goal = Number(data.payload.goal);
     current = 0;
+    insideText.textContent = "";
     updateBar(false);
   }
 
@@ -22,19 +24,35 @@ ws.onmessage = (msg) => {
     current += Number(data.payload.amount);
     updateBar(true);
   }
+
+  if (data.type === "clearGoal") {
+    goal = 0;
+    current = 0;
+    insideText.textContent = "";
+    updateBar(false);
+  }
 };
 
 function updateBar(playFx) {
-  const percent = goal ? Math.min((current / goal) * 100, 100) : 0;
+  const percent = goal
+    ? Math.min((current / goal) * 100, 100)
+    : 0;
 
   document.getElementById("goal-title").textContent =
     `🎄 $${current} / $${goal} 🎄`;
 
   document.getElementById("bar-fill").style.width = percent + "%";
 
+  // Mostrar texto SOLO cuando la goal está completa
+  if (percent >= 100) {
+    insideText.textContent = "Live Squirt";
+  } else {
+    insideText.textContent = "";
+  }
+
   if (playFx) {
     bell.currentTime = 0;
-    bell.play().catch(()=>{});
+    bell.play().catch(() => {});
     spawnParticles();
   }
 }
