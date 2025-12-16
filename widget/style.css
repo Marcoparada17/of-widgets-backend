@@ -8,7 +8,7 @@ body {
   width: 340px;
   padding: 15px;
   border-radius: 15px;
-  background: transparent;
+  background: rgba(185, 6, 6, 0.644);
   backdrop-filter: blur(6px);
   color: white;
   font-style: bold;
