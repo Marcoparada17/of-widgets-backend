@@ -34,11 +34,11 @@ body {
   background:
     linear-gradient(
       90deg,
-      #0b4d2a 0%,
-      #1fa86a 25%,
-      #a8ffd8 50%,
-      #1fa86a 75%,
-      #0b4d2a 100%
+      #4d0b0b 0%,
+      #a81f1f 25%,
+      #fd4949 50%,
+      #a81f1f 75%,
+      #4d0b0b 100%
     );
 
   background-size: 200% 100%;
@@ -83,10 +83,10 @@ body {
 .neon {
   color: #ffffff;
   text-shadow:
-    0 0 6px #00ff88,
-    0 0 12px #00ff88,
-    0 0 24px #00ff88,
-    0 0 40px #00ff88;
+    0 0 6px #ff0000,
+    0 0 12px #ff0000,
+    0 0 24px #ff0000,
+    0 0 40px #ff0000;
 }
 
 /* NIEVE */
