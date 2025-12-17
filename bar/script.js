@@ -8,6 +8,7 @@ let current = 0;
 
 const bar = document.getElementById("bar-fill");
 const goalText = document.querySelector(".goal-text");
+const amountText = document.querySelector(".goal-amount");
 const bell = document.getElementById("bellSound");
 
 ws.onmessage = (msg) => {
@@ -32,17 +33,21 @@ ws.onmessage = (msg) => {
 };
 
 function updateBar(playFx) {
-  const percent = goal ? Math.min((current / goal) * 100, 100) : 0;
+  const percent = goal
+    ? Math.min((current / goal) * 100, 100)
+    : 0;
+
   bar.style.width = percent + "%";
 
+  // TEXTO DE ABAJO (DORADO)
   if (goal > 0) {
-    goalText.textContent = `$${current} / $${goal}`;
+    amountText.textContent = `${current} / ${goal}`;
   } else {
-    goalText.textContent = "";
+    amountText.textContent = "";
   }
 
+  // NEÓN SOLO AL COMPLETAR
   if (percent >= 100) {
-    goalText.textContent = "LIVE SQUIRT";
     goalText.classList.add("neon");
   } else {
     goalText.classList.remove("neon");
