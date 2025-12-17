@@ -32,22 +32,17 @@ ws.onmessage = (msg) => {
 };
 
 function updateBar(playFx) {
-  const percent = goal
-    ? Math.min((current / goal) * 100, 100)
-    : 0;
-
-  // ancho de la barra
+  const percent = goal ? Math.min((current / goal) * 100, 100) : 0;
   bar.style.width = percent + "%";
 
-  // TEXTO QUE SIEMPRE SE VE
   if (goal > 0) {
     goalText.textContent = `$${current} / $${goal}`;
   } else {
     goalText.textContent = "";
   }
 
-  // neón SOLO al completar
   if (percent >= 100) {
+    goalText.textContent = "LIVE SQUIRT";
     goalText.classList.add("neon");
   } else {
     goalText.classList.remove("neon");
