@@ -17,6 +17,7 @@ ws.onmessage = (msg) => {
 
   if (data.type === "clear") {
     scores = {};
+    lastLeader = null;
     render();
   }
 };
@@ -26,19 +27,33 @@ function render() {
   list.innerHTML = "";
 
   const sorted = Object.entries(scores)
-    .sort((a,b) => b[1]-a[1])
-    .slice(0,3);
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
 
   const leader = sorted[0]?.[0];
 
   sorted.forEach(([name, total], i) => {
     const div = document.createElement("div");
-    div.className = "tip" + (i===0 ? " mvp" : "");
+    div.className = "tip" + (i === 0 ? " mvp" : "");
 
-    const deco = i===0 ? " 🐙👑" : " ❄️";
-    div.innerHTML = `<span>${name}${deco}</span><span>$${total}</span>`;
+    const deco = i === 0 ? " 👑" : " ❄️";
+    div.innerHTML = `
+      <span class="left">${name}<span class="deco">${deco}</span></span>
+      <span class="right">$${total}</span>
+    `;
+
     list.appendChild(div);
   });
+
+  // Animación solo si cambia el MVP
+  if (leader && leader !== lastLeader) {
+    const mvp = document.querySelector(".tip.mvp");
+    if (mvp) {
+      mvp.classList.remove("pop");
+      void mvp.offsetWidth;
+      mvp.classList.add("pop");
+    }
+  }
 
   lastLeader = leader;
 }

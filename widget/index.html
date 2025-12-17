@@ -8,8 +8,18 @@
 <body>
 
 <div id="container">
-  <h2>🎄 TOP TIPPERS 🎄</h2>
+  <div class="snow"></div>
+
+  <h2 class="title">TOP TIPPERS</h2>
   <div id="top-list"></div>
+
+  <!-- Opcional: modo manual (puedes ocultarlo si no lo quieres en OBS) -->
+  <div class="manual">
+    <input id="nameInput" placeholder="name" />
+    <input id="amountInput" placeholder="amount" type="number" />
+    <button id="addBtn">Add</button>
+    <button id="resetBtn">Clear</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
