@@ -83,6 +83,19 @@
 
 <hr>
 
+<button onclick="fetch('/api/send', {
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body: JSON.stringify({
+    modelId:'roman001',
+    type:'roulette'
+  })
+})">
+🎰 Girar Ruleta
+</button>
+
+
+
 <script>
 const MODEL_ID = "roman001";
 const API_URL = "/api/send";   // 🔥🔥🔥 RUTA RELATIVA — FUNCIONA LOCAL Y PRODUCCIÓN
