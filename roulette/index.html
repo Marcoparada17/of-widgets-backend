@@ -7,23 +7,39 @@
 </head>
 <body>
 
-<div id="roulette-wrapper">
+<div class="main">
+  <div class="plate" id="plate">
+    <ul class="inner" id="inner">
+      <!-- MISMO HTML DE LOS <li> QUE YA TIENES -->
+      <!-- NO LO MODIFIQUES -->
+      <!-- solo asegúrate que estén exactamente igual -->
+    </ul>
 
- <div id="roulette-wheel">
-  <div id="sectors"></div>
-  <div id="selector"></div>
+    <div class="data" id="data">
+      <div class="data-inner">
+        <div class="mask" id="mask">Waiting spin...</div>
+        <div class="result">
+          <div class="result-number" id="resultNumber">00</div>
+          <div class="result-color" id="resultColor">---</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="previous-results">
+    <ol class="previous-list" id="history">
+      <li class="visuallyhidden placeholder">No results yet.</li>
+    </ol>
+  </div>
 </div>
 
 
-  <div id="toast"></div>
-
-</div>
-
-<audio id="spinSound"
+<!-- 🔊 AUDIO REAL -->
+<audio
+  id="spinSound"
   src="https://www.myinstants.com/media/sounds/roulette-casino.mp3"
   preload="auto">
 </audio>
-
 
 <script src="script.js"></script>
 </body>
