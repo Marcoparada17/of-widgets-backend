@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Casino Roulette</title>
@@ -7,30 +7,22 @@
 </head>
 <body>
 
-<div id="roulette-container">
-  <div id="wheel">
-    <!-- números -->
-    <div class="slot">1</div>
-    <div class="slot">2</div>
-    <div class="slot">3</div>
-    <div class="slot">4</div>
-    <div class="slot">5</div>
-    <div class="slot">6</div>
-    <div class="slot">7</div>
-    <div class="slot">8</div>
-    <div class="slot">9</div>
-    <div class="slot">10</div>
-    <div class="slot">11</div>
-    <div class="slot">12</div>
-    <div class="slot">13</div>
+<div id="roulette-wrapper">
 
-    <!-- glow giratorio -->
-    <div id="spinner-glow"></div>
+  <div id="roulette-wheel">
+    <div id="numbers"></div>
+    <div id="selector"></div>
   </div>
 
-  <!-- toast -->
   <div id="toast"></div>
+
 </div>
+
+<audio id="spinSound"
+  src="https://www.myinstants.com/media/sounds/roulette-casino.mp3"
+  preload="auto">
+</audio>
+
 
 <script src="script.js"></script>
 </body>
