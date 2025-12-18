@@ -4,43 +4,50 @@ let ws;
 let spinning = false;
 let currentRotation = 0;
 
+// 🎯 NÚMEROS
 const numbers = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
-// dinámicas editables
-const dynamics = {
+// 📝 MENSAJES EDITABLES (AQUÍ ESCRIBES TÚ)
+const messages = {
   0: "Zona segura 🍀",
-  1: "Baile sexy 💃",
-  2: "Gemido 🔥",
+  1: "Baile sensual 💃",
+  2: "Beso a la cámara 😘",
   3: "Castigo leve 😈",
   4: "Shot 🍸",
-  5: "Quita prenda 👙",
-  6: "Modo caliente ON 😏",
-  7: "Susurro 🎤",
+  5: "Quita una prenda 👙",
+  6: "Modo caliente ON 🔥",
+  7: "Susurro al mic 🎤",
   8: "Mirada intensa 👀",
-  9: "Latigazo ⛓️",
+  9: "Latigazo simbólico ⛓️",
   10: "Baile lento 🎶",
   11: "Premio doble 🎁",
   12: "JACKPOT 💎"
 };
 
-const container = document.getElementById("numbers");
-
-// crear números
+// =======================
+// CREAR SECTORES
+// =======================
+const container = document.getElementById("sectors");
 numbers.forEach((num, i) => {
   const angle = (360 / numbers.length) * i;
-  const el = document.createElement("div");
 
-  el.className = "number";
-  el.textContent = num;
+  const sector = document.createElement("div");
+  sector.className = "sector " + (i % 2 === 0 ? "green" : "red");
+  sector.style.transform = `rotate(${angle}deg)`;
 
-  if (num === 0) el.classList.add("green");
-  else el.classList.add(i % 2 === 0 ? "black" : "green");
+  const label = document.createElement("span");
+  label.textContent = num;
 
-  el.style.transform = `rotate(${angle}deg) translate(0, -140px)`;
-  container.appendChild(el);
+  // contraste
+  label.style.color = i % 2 === 0 ? "#fff" : "#000";
+
+  sector.appendChild(label);
+  container.appendChild(sector);
 });
 
-// WS
+// =======================
+// WEBSOCKET
+// =======================
 function connectWS() {
   ws = new WebSocket(
     `wss://of-widgets-backend-production.up.railway.app/?modelId=${MODEL_ID}`
@@ -55,12 +62,18 @@ function connectWS() {
 }
 connectWS();
 
-// GIRO REAL
+// =======================
+// SPIN
+// =======================
 function spin() {
   if (spinning) return;
   spinning = true;
 
   const sound = document.getElementById("spinSound");
+  const toast = document.getElementById("toast");
+
+  toast.classList.remove("show");
+
   sound.currentTime = 0;
   sound.play().catch(()=>{});
 
@@ -73,15 +86,23 @@ function spin() {
 
   container.style.transform = `rotate(${currentRotation}deg)`;
 
+  // ⏱ MISMO TIEMPO QUE EL AUDIO
   setTimeout(() => {
-    showResult(numbers[index]);
+    const result = numbers[index];
+    showToast(result);
     spinning = false;
-  }, 6200); // 🔥 MISMA DURACIÓN QUE EL AUDIO
+  }, 6200);
 }
 
-function showResult(num) {
+// =======================
+// TOAST
+// =======================
+function showToast(num) {
   const toast = document.getElementById("toast");
-  toast.textContent = `🎰 ${num} — ${dynamics[num]}`;
+  toast.textContent = `🎰 ${num} → ${messages[num] || "Sin dinámica"}`;
   toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 5000);
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 5000);
 }
