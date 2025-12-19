@@ -55,7 +55,7 @@ function spin() {
   if (spinning) return;
   spinning = true;
 
-  const number = Math.floor(Math.random() * 37);
+  const number = Math.floor(Math.random() * 13); // 0 al 12
   inner.setAttribute("data-spinto", number);
 
   mask.textContent = "No more bets";
@@ -79,6 +79,7 @@ function spin() {
     spinning = false;
   }, SPIN_TIME);
 }
+
 
 // =====================
 // HISTORIAL
