@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Casino Roulette</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="main">
+<div class="roulette-wrapper">
   <div class="plate" id="plate">
+    <div class="needle"></div>
+
     <ul class="inner" id="inner">
-      <!-- MISMO HTML DE LOS <li> QUE YA TIENES -->
-      <!-- NO LO MODIFIQUES -->
-      <!-- solo asegúrate que estén exactamente igual -->
+      <!-- Los 13 números fijos (0 al 12) -->
+      <li style="--i: 0;" data-number="0" class="green">0</li>
+      <li style="--i: 1;" data-number="1" class="red">1</li>
+      <li style="--i: 2;" data-number="2" class="black">2</li>
+      <li style="--i: 3;" data-number="3" class="red">3</li>
+      <li style="--i: 4;" data-number="4" class="black">4</li>
+      <li style="--i: 5;" data-number="5" class="red">5</li>
+      <li style="--i: 6;" data-number="6" class="black">6</li>
+      <li style="--i: 7;" data-number="7" class="red">7</li>
+      <li style="--i: 8;" data-number="8" class="black">8</li>
+      <li style="--i: 9;" data-number="9" class="red">9</li>
+      <li style="--i: 10;" data-number="10" class="black">10</li>
+      <li style="--i: 11;" data-number="11" class="red">11</li>
+      <li style="--i: 12;" data-number="12" class="black">12</li>
     </ul>
 
     <div class="data" id="data">
@@ -33,13 +46,11 @@
   </div>
 </div>
 
-
-<!-- 🔊 AUDIO REAL -->
 <audio
   id="spinSound"
   src="https://www.myinstants.com/media/sounds/roulette-casino.mp3"
-  preload="auto">
-</audio>
+  preload="auto"
+></audio>
 
 <script src="script.js"></script>
 </body>
