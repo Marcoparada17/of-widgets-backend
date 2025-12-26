@@ -1,72 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Casino Roulette</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Ruleta</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="roulette-wrapper">
-  <div class="plate" id="plate">
-    <!-- Esto va justo dentro del div .plate -->
-<span class="number" style="transform: rotate(0deg) translateY(-210px) rotate(180deg); color: green;">0</span>
-<span class="number" style="transform: rotate(27.69deg) translateY(-210px) rotate(180deg); color: red;">1</span>
-<span class="number" style="transform: rotate(55.38deg) translateY(-210px) rotate(180deg); color: black;">2</span>
-<span class="number" style="transform: rotate(83.07deg) translateY(-210px) rotate(180deg); color: red;">3</span>
-<span class="number" style="transform: rotate(110.76deg) translateY(-210px) rotate(180deg); color: black;">4</span>
-<span class="number" style="transform: rotate(138.45deg) translateY(-210px) rotate(180deg); color: red;">5</span>
-<span class="number" style="transform: rotate(166.14deg) translateY(-210px) rotate(180deg); color: black;">6</span>
-<span class="number" style="transform: rotate(193.83deg) translateY(-210px) rotate(180deg); color: red;">7</span>
-<span class="number" style="transform: rotate(221.52deg) translateY(-210px) rotate(180deg); color: black;">8</span>
-<span class="number" style="transform: rotate(249.21deg) translateY(-210px) rotate(180deg); color: red;">9</span>
-<span class="number" style="transform: rotate(276.9deg) translateY(-210px) rotate(180deg); color: black;">10</span>
-<span class="number" style="transform: rotate(304.59deg) translateY(-210px) rotate(180deg); color: red;">11</span>
-<span class="number" style="transform: rotate(332.28deg) translateY(-210px) rotate(180deg); color: black;">12</span>
+<div class="casino">
+  <div class="pointer"></div>
 
-    <div class="needle"></div>
-
-    <ul class="inner" id="inner">
-      <!-- Los 13 números fijos (0 al 12) -->
-      <li style="--i: 0;" data-number="0" class="white">0</li>
-      <li style="--i: 1;" data-number="1" class="black">1</li>
-      <li style="--i: 2;" data-number="2" class="red">2</li>
-      <li style="--i: 3;" data-number="3" class="black">3</li>
-      <li style="--i: 4;" data-number="4" class="red">4</li>
-      <li style="--i: 5;" data-number="5" class="black">5</li>
-      <li style="--i: 6;" data-number="6" class="red">6</li>
-      <li style="--i: 7;" data-number="7" class="black">7</li>
-      <li style="--i: 8;" data-number="8" class="red">8</li>
-      <li style="--i: 9;" data-number="9" class="black">9</li>
-      <li style="--i: 10;" data-number="10" class="red">10</li>
-      <li style="--i: 11;" data-number="11" class="black">11</li>
-      <li style="--i: 12;" data-number="12" class="red">12</li>
-    </ul>
-
-    <div class="data" id="data">
-      <div class="data-inner">
-        <div class="mask" id="mask">Waiting spin...</div>
-        <div class="result">
-          <div class="result-number" id="resultNumber">00</div>
-          <div class="result-color" id="resultColor">---</div>
-        </div>
+  <div class=".roulette-wrapper">
+    <div class="roulette">
+      <div class="">
+        <div class="numbers"></div>
       </div>
     </div>
-  </div>
+  <div class="center-cap"></div>
 
-  <div class="previous-results">
-    <ol class="previous-list" id="history">
-      <li class="visuallyhidden placeholder">No results yet.</li>
-    </ol>
-  </div>
+  <audio id="spinSound" src="https://www.myinstants.com/media/sounds/roulette-casino.mp3"></audio>
 </div>
-
+<script src="script.js"></script>
+</body>
+</html>
+<!--
+  The following audio element is used to play the spin sound when the user clicks the spin button
 <audio
   id="spinSound"
   src="https://www.myinstants.com/media/sounds/roulette-casino.mp3"
   preload="auto"
 ></audio>
-
-<script src="script.js"></script>
-</body>
-</html>
+!-->

@@ -1,9 +1,10 @@
 const MODEL_ID = "roman001";
 const SPIN_TIME = 9000;
+const SECTORS = 13;
+const DEG_PER_SECTOR = 360 / SECTORS;
 
-const redNumbers = [32,19,21,25,34,27,36,30,23,5,16,1,14,9,18,7,12,3];
+const redNumbers = [1, 3, 5, 7, 9, 11];
 
-// 📝 AQUÍ ESCRIBES LAS DINÁMICAS
 const messages = {
   0: "Zona segura 🍀",
   1: "Baile sensual 💃",
@@ -22,25 +23,22 @@ const messages = {
 
 let ws;
 let spinning = false;
+let rotation = 0;
 
-const inner = document.getElementById("inner");
+const plate = document.querySelector(".plate");
 const mask = document.getElementById("mask");
-const data = document.getElementById("data");
 const resultNumber = document.getElementById("resultNumber");
 const resultColor = document.getElementById("resultColor");
 const history = document.getElementById("history");
 const sound = document.getElementById("spinSound");
 
-// =====================
-// WEBSOCKET
-// =====================
+// ===== WEBSOCKET =====
 function connectWS() {
-  ws = new WebSocket(
-    `wss://of-widgets-backend-production.up.railway.app/?modelId=${MODEL_ID}`
-  );
+  const protocol = location.protocol === "https:" ? "wss" : "ws";
+  ws = new WebSocket(`${protocol}://${location.host}?modelId=${MODEL_ID}`);
 
-  ws.onmessage = (msg) => {
-    const data = JSON.parse(msg.data);
+  ws.onmessage = (e) => {
+    const data = JSON.parse(e.data);
     if (data.type === "roulette") spin();
   };
 
@@ -48,18 +46,25 @@ function connectWS() {
 }
 connectWS();
 
-// =====================
-// SPIN
-// =====================
+// ===== SPIN =====
 function spin() {
   if (spinning) return;
   spinning = true;
 
-  const number = Math.floor(Math.random() * 13); // 0 al 12
-  inner.setAttribute("data-spinto", number);
+  const number = Math.floor(Math.random() * SECTORS);
+  const spins = 6 * 360;
+
+  const target =
+    spins +
+    (360 - number * DEG_PER_SECTOR - DEG_PER_SECTOR / 2);
+
+  rotation += target;
+
+  plate.style.transform = `rotate(${rotation}deg)`;
 
   mask.textContent = "No more bets";
-  data.classList.remove("reveal");
+  resultNumber.textContent = "";
+  resultColor.textContent = "";
 
   sound.currentTime = 0;
   sound.play().catch(() => {});
@@ -71,34 +76,17 @@ function spin() {
 
     resultNumber.textContent = number;
     resultColor.textContent = color;
-    data.classList.add("reveal");
+    mask.textContent = messages[number];
 
-    showMessage(number);
     addHistory(number, color);
-
     spinning = false;
   }, SPIN_TIME);
 }
 
-
-// =====================
-// HISTORIAL
-// =====================
+// ===== HISTORIAL =====
 function addHistory(num, color) {
-  document.querySelector(".placeholder")?.remove();
-
   const li = document.createElement("li");
   li.className = `previous-result color-${color}`;
-  li.innerHTML = `
-    <span class="previous-number">${num}</span>
-    <span class="previous-color">${color}</span>
-  `;
+  li.innerHTML = `<strong>${num}</strong> <span>${color}</span>`;
   history.prepend(li);
-}
-
-// =====================
-// MENSAJE
-// =====================
-function showMessage(num) {
-  mask.textContent = messages[num] || "🔥 Acción 🔥";
 }
