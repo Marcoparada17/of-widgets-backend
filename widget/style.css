@@ -13,8 +13,8 @@ body {
 
   background: linear-gradient(
     180deg,
-    rgba(160, 0, 0, 0.75),
-    rgba(110, 0, 0, 0.55)
+    rgba(180, 139, 2, 0.795),
+    rgba(157, 168, 1, 0.767)
   );
 
   border: 1px solid rgba(255, 215, 0, 0.25);
@@ -51,7 +51,7 @@ body {
   font-size: 18px;
   color: white;
 
-  background: rgba(250, 47, 47, 0.541);
+  background: rgba(213, 250, 47, 0.541);
   border: 1px solid rgba(255,255,255,0.15);
 }
 
@@ -59,7 +59,7 @@ body {
 .mvp {
   background: linear-gradient(
     90deg,
-    rgba(177, 0, 0, 0.9),
+    rgba(16, 121, 7, 0.993),
     rgba(218, 203, 70, 0.795)
   );
 

@@ -18,7 +18,7 @@ body {
 
   border: 1px solid rgba(255, 215, 0, 0.4);
   box-shadow:
-    0 0 18px rgba(255, 0, 0, 0.35),
+    0 0 18px rgba(4, 202, 21, 0.63),
     inset 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
@@ -34,11 +34,11 @@ body {
   background:
     linear-gradient(
       90deg,
-      #6b0b0b 0%,
-      #a81f1f 25%,
-      #fd4949 50%,
+      #696b0b 0%,
+      #909e0e 25%,
+      #fbff1c 50%,
       #97950f 75%,
-      #a50a0a 100%
+      #fdef21 100%
     );
 
   background-size: 200% 100%;
@@ -83,10 +83,10 @@ body {
 .neon {
   color: #ffffff;
   text-shadow:
-    0 0 6px #960303,
-    0 0 12px #800000,
-    0 0 24px #c20000,
-    0 0 40px #970d0d;
+    0 0 6px #1a7902,
+    0 0 12px #3faa01,
+    0 0 24px #5dce00,
+    0 0 40px #44b900;
 }
 
 /* NIEVE */
